@@ -26,8 +26,14 @@
                 <span class="topic-label">Chemistry Fundamentals</span>
                 <h1>How Chemical Reactions Work</h1>
                 <p class="hero-subtitle">Discover how atoms rearrange themselves to form new compounds through chemical reactions</p>
-                <div class="hero-image">
-                    <img src="placeholder-reaction.jpg" alt="Chemical reaction visualization" class="reaction-diagram">
+                <div class="hero-animation">
+                    <canvas id="reactionCanvas" width="800" height="400"></canvas>
+                    <button id="replayButton" class="replay-btn">
+                        <svg width="24" height="24" viewBox="0 0 24 24">
+                            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
+                        </svg>
+                        Replay
+                    </button>
                 </div>
             </div>
         </section>
@@ -75,7 +81,7 @@
                         <span class="molecule">2H₂O</span>
                     </div>
                 </div>
-                <img src="placeholder-mechanism.jpg" alt="Reaction mechanism steps" class="mechanism-image">
+                <div class="placeholder-text">[Reaction mechanism diagram to be added here]</div>
             </div>
             <div class="reaction-details">
                 <div class="detail-card">
@@ -117,13 +123,13 @@
                 </ul>
             </div>
             <div class="split-image">
-                <img src="placeholder-molecular.jpg" alt="Molecular rearrangement visualization">
+                <div class="placeholder-text">[Molecular rearrangement diagram to be added here]</div>
             </div>
         </section>
 
         <section id="energy" class="split-section">
             <div class="split-image">
-                <img src="placeholder-energy.jpg" alt="Energy diagram">
+                <div class="placeholder-text">[Energy diagram to be added here]</div>
             </div>
             <div class="split-content">
                 <span class="section-label">Energy Changes</span>
@@ -145,7 +151,7 @@
             </div>
             <div class="application-grid">
                 <div class="application-card">
-                    <img src="placeholder-cooking.jpg" alt="Cooking applications">
+                    <div class="placeholder-text">[Cooking reaction image]</div>
                     <div class="card-content">
                         <h3>In the Kitchen</h3>
                         <p>Chemical reactions in cooking:</p>
@@ -157,7 +163,7 @@
                     </div>
                 </div>
                 <div class="application-card">
-                    <img src="placeholder-nature.jpg" alt="Natural reactions">
+                    <div class="placeholder-text">[Nature processes image]</div>
                     <div class="card-content">
                         <h3>In Nature</h3>
                         <p>Natural chemical processes:</p>
@@ -169,7 +175,7 @@
                     </div>
                 </div>
                 <div class="application-card">
-                    <img src="placeholder-industry.jpg" alt="Industrial applications">
+                    <div class="placeholder-text">[Industrial processes image]</div>
                     <div class="card-content">
                         <h3>In Industry</h3>
                         <p>Industrial processes:</p>
@@ -236,5 +242,6 @@
     <script>
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
+    <script src="js/reactionAnimation.js"></script>
 </body>
 </html>

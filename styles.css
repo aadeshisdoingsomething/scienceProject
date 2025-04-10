@@ -191,6 +191,76 @@ section {
     margin-top: 2.5rem;
 }
 
+.hero-animation {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 3rem auto;
+    text-align: center;
+    background: rgba(31, 41, 55, 0.8);  /* Darker background */
+    border-radius: 12px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#reactionCanvas {
+    background: rgba(17, 24, 39, 0.95);  /* Dark canvas background */
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+.atom-key {
+    position: absolute;
+    top: 3rem;
+    right: 3rem;  /* Changed from left to right */
+    background: rgba(31, 41, 55, 0.9);  /* Dark semi-transparent background */
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    text-align: left;
+    z-index: 2;
+    min-width: 150px;
+}
+
+.atom-key-title {
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);  /* Match theme text color */
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.atom-key-item {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin: 0.5rem 0;
+    color: var(--text-color);  /* Match theme text color */
+    font-size: 0.9rem;
+}
+
+.replay-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: #2196f3;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 0 auto;
+}
+
+.replay-btn:hover {
+    background: #1976d2;
+}
+
 /* ----------------------------------- */
 /* Call to Action Buttons */
 /* ----------------------------------- */
@@ -756,4 +826,22 @@ section {
         grid-template-columns: 1fr;
         text-align: center;
     }
+}
+
+.placeholder-text {
+    background-color: #f0f0f0;
+    border: 2px dashed #ccc;
+    padding: 2rem;
+    text-align: center;
+    color: #666;
+    font-style: italic;
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.application-card .placeholder-text {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
