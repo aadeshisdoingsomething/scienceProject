@@ -13,9 +13,11 @@
             <div class="logo">Chemical Reactions</div>
             <div class="nav-links">
                 <a href="#basics">Basics</a>
-                <a href="#mechanism">Mechanism</a>
-                <a href="#example">Case Study</a>
-                <a href="#applications">Real World</a>
+                <a href="#atoms-molecules">Atoms & Molecules</a>
+                <a href="#reactants-products">Reactants & Products</a>
+                <a href="#conserved">Atoms Conserved</a>
+                <a href="#mechanism">How It Works</a>
+                <a href="#properties">Properties</a>
             </div>
         </div>
     </nav>
@@ -27,13 +29,21 @@
                 <h1>How Chemical Reactions Work</h1>
                 <p class="hero-subtitle">Discover how atoms rearrange themselves to form new compounds through chemical reactions</p>
                 <div class="hero-animation">
-                    <canvas id="reactionCanvas" width="800" height="400"></canvas>
-                    <button id="replayButton" class="replay-btn">
-                        <svg width="24" height="24" viewBox="0 0 24 24">
-                            <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
-                        </svg>
-                        Replay
-                    </button>
+                    <canvas id="reactionCanvas" width="800" height="300"></canvas>
+                    <div class="animation-controls">
+                        <button id="mainPauseButton" class="control-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="currentColor"/>
+                            </svg>
+                            Pause
+                        </button>
+                        <button id="mainReplayButton" class="control-btn">
+                            <svg width="24" height="24" viewBox="0 0 24 24">
+                                <path d="M12 5V1L7 6l5 5V7c3.31 0 6 2.69 6 6s-2.69 6-6 6-6-2.69-6-6H4c0 4.42 3.58 8 8 8s8-3.58 8-8-3.58-8-8-8z" fill="currentColor"/>
+                            </svg>
+                            Replay
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -41,23 +51,102 @@
         <section id="basics" class="info-section">
             <div class="section-header">
                 <span class="section-label">The Basics</span>
-                <h2>Understanding Chemical Reactions</h2>
+                <h2>What Happens in a Chemical Reaction?</h2>
             </div>
             <div class="info-cards">
                 <div class="info-card">
-                    <div class="card-icon">⚛️</div>
-                    <h3>Atomic Rearrangement</h3>
-                    <p>In chemical reactions, atoms reorganize by breaking existing bonds and forming new ones</p>
+                    <div class="card-icon">🔄</div>
+                    <h3>Breaking Apart</h3>
+                    <p>Molecules of reactants break apart as their atoms disconnect from each other</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🔗</div>
+                    <h3>Reconnecting</h3>
+                    <p>Atoms connect in new ways to form different molecules called products</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">✨</div>
+                    <h3>New Properties</h3>
+                    <p>The new arrangement of atoms gives products different properties from reactants</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Section: Atoms and Molecules -->
+        <section id="atoms-molecules" class="info-section" style="background-color: rgba(255, 255, 255, 0.02);">
+            <div class="section-header">
+                <span class="section-label">Building Blocks</span>
+                <h2>What are Atoms and Molecules?</h2>
+            </div>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="card-icon">🧱</div>
+                    <h3>Atoms</h3>
+                    <p>Atoms are the tiny basic building blocks of everything, like letters of an alphabet.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🧩</div>
+                    <h3>Molecules</h3>
+                    <p>Molecules are groups of two or more atoms stuck together, forming 'words' or simple structures.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🤝</div>
+                    <h3>Chemical Bonds</h3>
+                    <p>Atoms in a molecule are held together by connections called chemical bonds.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modified Section: Reactants and Products (Use split-section) -->
+        <section id="reactants-products" class="split-section">
+            <div class="split-content">
+                <span class="section-label">Before and After</span>
+                <h2>Reactants and Products</h2>
+                <p>In a chemical reaction, we start with substances called <strong>reactants</strong> and end up with new substances called <strong>products</strong>.</p>
+                <ul>
+                    <li><strong>Reactants:</strong> The ingredients you mix together.</li>
+                    <li><strong>Products:</strong> What gets made after the reaction happens.</li>
+                    <li>The arrow (→) in a chemical equation shows the change from reactants to products.</li>
+                </ul>
+                <div class="animation-controls">
+                    <button id="rpPlayButton" class="control-btn">Show Change</button>
+                </div>
+            </div>
+            <div class="split-image">
+                <!-- Replace SVG with Canvas -->
+                <div class="interactive-diagram">
+                    <h4>Reactants to Products</h4>
+                    <canvas id="rpCanvas" width="400" height="120"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Modified Section: Atoms are Conserved (Add central visual placeholder) -->
+        <section id="conserved" class="info-section" style="background-color: rgba(255, 255, 255, 0.02);">
+            <div class="section-header centered"> <!-- Centered header -->
+                <span class="section-label">Counting Atoms</span>
+                <h2>Atoms Aren't Lost, Just Rearranged!</h2>
+            </div>
+            <!-- Increase max-width and canvas width -->
+            <div class="interactive-diagram" style="max-width: 800px; margin: 2rem auto; display: block;">
+                <h4>Atom Conservation Example (CH₄ + 2O₂ → CO₂ + 2H₂O)</h4>
+                <canvas id="conservationCanvas" width="800" height="300"></canvas>
+            </div>
+            <div class="info-cards">
+                <div class="info-card">
+                    <div class="card-icon">🔢</div>
+                    <h3>Same Atoms</h3>
+                    <p>The same number and types of atoms that start as reactants are present in the products.</p>
+                </div>
+                <div class="info-card">
+                    <div class="card-icon">🚫</div>
+                    <h3>No Creation/Destruction</h3>
+                    <p>Atoms are not created or destroyed during a chemical reaction, only rearranged.</p>
                 </div>
                 <div class="info-card">
                     <div class="card-icon">⚖️</div>
                     <h3>Conservation of Mass</h3>
-                    <p>Atoms are neither created nor destroyed; they simply rearrange into new combinations</p>
-                </div>
-                <div class="info-card">
-                    <div class="card-icon">🔄</div>
-                    <h3>Bond Changes</h3>
-                    <p>Energy is absorbed or released as chemical bonds break and form</p>
+                    <p>Because atoms aren't lost, the total mass stays the same before and after the reaction.</p>
                 </div>
             </div>
         </section>
@@ -65,7 +154,7 @@
         <section id="mechanism" class="reaction-section">
             <div class="section-header centered">
                 <span class="section-label">The Process</span>
-                <h2>How Atoms Rearrange</h2>
+                <h2>How Do Atoms Rearrange?</h2>
             </div>
             <div class="reaction-diagram">
                 <div class="equation-display">
@@ -81,135 +170,93 @@
                         <span class="molecule">2H₂O</span>
                     </div>
                 </div>
-                <div class="placeholder-text">[Reaction mechanism diagram to be added here]</div>
+                <!-- Replace placeholder with Canvas -->
+                <div class="interactive-diagram" style="max-width: 700px; margin: 2rem auto; display: block;">
+                    <h4>Mechanism Steps (CH₄ + 2O₂ → CO₂ + 2H₂O)</h4>
+                    <canvas id="mechanismCanvas" width="700" height="280"></canvas>
+                     <div class="animation-controls">
+                        <button id="mechPlayPauseButton" class="control-btn">Play Steps</button>
+                        <button id="mechResetButton" class="control-btn">Reset</button>
+                    </div>
+                </div>
             </div>
             <div class="reaction-details">
                 <div class="detail-card">
-                    <h3>Step 1: Breaking Bonds</h3>
+                    <h3>1. Starting Materials</h3>
                     <ul>
-                        <li>C-H bonds in methane break</li>
-                        <li>O=O bonds in oxygen break</li>
-                        <li>Energy is required (activation energy)</li>
+                        <li>Methane (CH₄) - a gas molecule</li>
+                        <li>Oxygen (O₂) - molecules from air</li>
+                        <li>Each has atoms connected together</li>
                     </ul>
                 </div>
                 <div class="detail-card">
-                    <h3>Step 2: Rearrangement</h3>
+                    <h3>2. During Reaction</h3>
                     <ul>
-                        <li>Atoms move to new positions</li>
-                        <li>Electrons redistribute</li>
-                        <li>Intermediate states form</li>
+                        <li>Atoms break their connections</li>
+                        <li>Atoms move around</li>
+                        <li>New connections form</li>
                     </ul>
                 </div>
                 <div class="detail-card">
-                    <h3>Step 3: Forming Bonds</h3>
+                    <h3>3. Final Products</h3>
                     <ul>
-                        <li>New C=O bonds form in CO₂</li>
-                        <li>New H-O bonds form in H₂O</li>
-                        <li>Energy is released (exothermic)</li>
+                        <li>Carbon dioxide (CO₂) forms</li>
+                        <li>Water (H₂O) forms</li>
+                        <li>New molecules have new properties</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-        <section id="example" class="split-section">
-            <div class="split-content">
-                <span class="section-label">Case Study</span>
-                <h2>Methane Combustion Example</h2>
-                <p>When methane (CH₄) burns in oxygen (O₂), the atoms rearrange completely:</p>
-                <ul>
-                    <li>Carbon forms double bonds with oxygen</li>
-                    <li>Hydrogen combines with oxygen</li>
-                    <li>New stable molecules form</li>
-                </ul>
-            </div>
+        <!-- Keep only one properties section -->
+        <section id="properties" class="split-section">
             <div class="split-image">
-                <div class="placeholder-text">[Molecular rearrangement diagram to be added here]</div>
-            </div>
-        </section>
-
-        <section id="energy" class="split-section">
-            <div class="split-image">
-                <div class="placeholder-text">[Energy diagram to be added here]</div>
+                <div class="interactive-diagram">
+                    <h4>Comparing Properties</h4>
+                    <div class="property-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Property</th>
+                                    <th>Reactants (CH₄ + 2O₂)</th>
+                                    <th>Products (CO₂ + 2H₂O)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Physical State</td>
+                                    <td>Both gases</td>
+                                    <td>Gas and liquid</td>
+                                </tr>
+                                <tr>
+                                    <td>Flammability</td>
+                                    <td>Flammable/supports burning</td>
+                                    <td>Non-flammable</td>
+                                </tr>
+                                <tr>
+                                    <td>Molecular Structure</td>
+                                    <td>CH₄ and O₂</td>
+                                    <td>CO₂ and H₂O</td>
+                                </tr>
+                                <tr>
+                                    <td>Behavior with fire</td>
+                                    <td>Burns/helps burning</td>
+                                    <td>Puts out fires</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
             <div class="split-content">
-                <span class="section-label">Energy Changes</span>
-                <h2>Energy in Reactions</h2>
-                <p>During the reaction:</p>
+                <span class="section-label">Understanding Changes</span>
+                <h2>Why Properties Change</h2>
+                <p>When atoms rearrange during a chemical reaction, the new molecules have different properties because:</p>
                 <ul>
-                    <li>Initial energy input breaks bonds</li>
-                    <li>Atoms rearrange in space</li>
-                    <li>New bonds release energy</li>
-                    <li>Net energy release: 891 kJ/mol</li>
+                    <li>Atoms are connected in new ways (different bonds).</li>
+                    <li>The shape and structure of molecules are different.</li>
+                    <li>These changes affect how molecules interact and behave.</li>
                 </ul>
-            </div>
-        </section>
-
-        <section id="applications" class="applications-section">
-            <div class="section-header">
-                <span class="section-label">Real World Applications</span>
-                <h2>Chemical Reactions Around Us</h2>
-            </div>
-            <div class="application-grid">
-                <div class="application-card">
-                    <div class="placeholder-text">[Cooking reaction image]</div>
-                    <div class="card-content">
-                        <h3>In the Kitchen</h3>
-                        <p>Chemical reactions in cooking:</p>
-                        <ul>
-                            <li>Gas stove combustion</li>
-                            <li>Baking reactions</li>
-                            <li>Food browning</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="application-card">
-                    <div class="placeholder-text">[Nature processes image]</div>
-                    <div class="card-content">
-                        <h3>In Nature</h3>
-                        <p>Natural chemical processes:</p>
-                        <ul>
-                            <li>Photosynthesis</li>
-                            <li>Cellular respiration</li>
-                            <li>Rock formation</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="application-card">
-                    <div class="placeholder-text">[Industrial processes image]</div>
-                    <div class="card-content">
-                        <h3>In Industry</h3>
-                        <p>Industrial processes:</p>
-                        <ul>
-                            <li>Fuel combustion</li>
-                            <li>Material synthesis</li>
-                            <li>Chemical manufacturing</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="learn-more-section" id="learn-more">
-            <div class="section-header centered">
-                <span class="section-label">Explore More</span>
-                <h2>Understanding Different Types of Reactions</h2>
-            </div>
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <h3>Synthesis Reactions</h3>
-                    <p>How simple substances combine to form complex compounds</p>
-                    <a href="#" class="resource-link">Learn More →</a>
-                </div>
-                <div class="resource-card">
-                    <h3>Decomposition</h3>
-                    <p>Breaking down complex substances into simpler ones</p>
-                    <a href="#" class="resource-link">Learn More →</a>
-                </div>
-                <div class="resource-card">
-                    <h3>Exchange Reactions</h3>
-                    <p>How atoms swap partners to form new compounds</p>
-                    <a href="#" class="resource-link">Learn More →</a>
-                </div>
             </div>
         </section>
     </main>
@@ -217,31 +264,82 @@
     <footer class="site-footer">
         <div class="footer-content">
             <div class="footer-section">
-                <h4>Chemical Reactions</h4>
-                <p>Understanding the building blocks of change</p>
-            </div>
-            <div class="footer-section">
                 <h4>Quick Links</h4>
                 <a href="#basics">Basics</a>
-                <a href="#mechanism">Mechanism</a>
-                <a href="#example">Case Study</a>
-                <a href="#applications">Real World</a>
+                <a href="#atoms-molecules">Atoms & Molecules</a>
+                <a href="#reactants-products">Reactants & Products</a>
+                <a href="#conserved">Atoms Conserved</a>
+                <a href="#mechanism">How It Works</a>
+                <a href="#properties">Properties</a>
             </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <a href="#">Chemistry Guide</a>
-                <a href="#">Reaction Types</a>
-                <a href="#">Energy Changes</a>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© <span id="current-year">2024</span> Chemistry Education</p>
         </div>
     </footer>
 
+    <!-- Move scripts to end of body -->
     <script>
+        // Update year immediately when script loads
         document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
     <script src="js/reactionAnimation.js"></script>
+    <script src="js/reactantsProductsAnim.js"></script>
+    <script src="js/conservationAnim.js"></script>
+    <script src="js/mechanismAnim.js"></script> <!-- Add new script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Main Reaction Animation
+            const reactionAnim = new ReactionAnimation('reactionCanvas');
+            const mainPauseBtn = document.getElementById('mainPauseButton');
+            const mainReplayBtn = document.getElementById('mainReplayButton');
+
+            if (mainPauseBtn) {
+                mainPauseBtn.addEventListener('click', () => {
+                    reactionAnim.togglePause();
+                    mainPauseBtn.innerHTML = reactionAnim.isPaused ?
+                        `<svg width="24" height="24" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="currentColor"/></svg> Play` :
+                        `<svg width="24" height="24" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="currentColor"/></svg> Pause`;
+                });
+            }
+            if (mainReplayBtn) {
+                mainReplayBtn.addEventListener('click', () => {
+                    reactionAnim.startReaction();
+                    if (mainPauseBtn) { // Reset pause button text
+                        mainPauseBtn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" fill="currentColor"/></svg> Pause`;
+                    }
+                });
+            }
+            reactionAnim.startReaction(); // Start on load
+
+            // Reactants/Products Animation
+            const rpAnim = new ReactantsProductsAnimation('rpCanvas');
+            const rpPlayBtn = document.getElementById('rpPlayButton');
+            if (rpPlayBtn && rpAnim) {
+                rpPlayBtn.addEventListener('click', () => {
+                    rpAnim.resetAndPlay();
+                });
+            }
+
+            // Conservation Comparison (Static) - Just initialize
+            const consComp = new ConservationComparison('conservationCanvas'); // Renamed instance
+
+            // Mechanism Animation
+            const mechAnim = new MechanismAnimation('mechanismCanvas');
+            const mechPlayPauseBtn = document.getElementById('mechPlayPauseButton');
+            const mechResetBtn = document.getElementById('mechResetButton');
+
+            if(mechPlayPauseBtn && mechAnim) {
+                mechPlayPauseBtn.addEventListener('click', () => {
+                    const isPaused = mechAnim.togglePlayPause();
+                    mechPlayPauseBtn.textContent = isPaused ? 'Play Steps' : 'Pause';
+                });
+            }
+            if(mechResetBtn && mechAnim) {
+                mechResetBtn.addEventListener('click', () => {
+                    mechAnim.reset();
+                    if(mechPlayPauseBtn) mechPlayPauseBtn.textContent = 'Play Steps';
+                });
+            }
+
+        });
+    </script>
 </body>
 </html>

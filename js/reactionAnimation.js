@@ -28,6 +28,7 @@ class ReactionAnimation {
         this.atoms = [];
         this.animationFrame = null;
         this.state = 'initial'; // Track animation state
+        this.isPaused = false;
         this.setupAtoms();
         this.setupKey();
         this.createKeyElement();
@@ -42,7 +43,13 @@ class ReactionAnimation {
     }
 
     createKeyElement() {
-        const container = document.getElementById('reactionCanvas').parentElement;
+        // Remove any existing atom key first
+        const existingKey = this.canvas.parentElement.querySelector('.atom-key');
+        if (existingKey) {
+            existingKey.remove();
+        }
+
+        const container = this.canvas.parentElement;
         const keyDiv = document.createElement('div');
         keyDiv.className = 'atom-key';
         
@@ -67,7 +74,7 @@ class ReactionAnimation {
 
     drawStateLabel() {
         this.ctx.font = 'bold 16px Arial';
-        this.ctx.fillStyle = '#333';
+        this.ctx.fillStyle = '#666'; // Changed from #333 for better contrast
         this.ctx.textAlign = 'center';
         const labelY = this.canvas.height - 30;
         
@@ -80,7 +87,7 @@ class ReactionAnimation {
 
     drawMoleculeLabels() {
         this.ctx.font = '14px Arial';
-        this.ctx.fillStyle = '#000';
+        this.ctx.fillStyle = '#333'; // Changed from #000 for better contrast
         this.ctx.textAlign = 'center';
 
         if (this.state === 'initial') {
@@ -115,7 +122,11 @@ class ReactionAnimation {
     }
 
     animate() {
+        if (this.isPaused) return;
+        
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.ctx.fillStyle = '#ffffff';
+        this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
         
         // Draw background elements
         this.drawStateLabel();
@@ -128,6 +139,13 @@ class ReactionAnimation {
         });
 
         this.animationFrame = requestAnimationFrame(() => this.animate());
+    }
+
+    togglePause() {
+        this.isPaused = !this.isPaused;
+        if (!this.isPaused) {
+            this.animate();
+        }
     }
 
     startReaction() {
@@ -156,6 +174,7 @@ class ReactionAnimation {
             this.atoms[8].targetX = 490;
         }, 2000);
 
+        this.isPaused = false;
         this.animate();
     }
 }

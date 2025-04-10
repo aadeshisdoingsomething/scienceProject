@@ -11,6 +11,9 @@
     --secondary-accent: #2563eb; /* Blue */
     --link-color: #818cf8; /* Light Purple/Blue */
     --heading-gradient: linear-gradient(to right, var(--primary-accent), var(--secondary-accent));
+    /* Add responsive container sizes */
+    --container-max: 1400px;
+    --container-narrow: 1000px;
 }
 
 /* Optional: If you want a light theme toggle later, keep this */
@@ -29,6 +32,8 @@
 html {
     scroll-behavior: smooth;
     box-sizing: border-box;
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
 }
 
 *, *:before, *:after {
@@ -42,11 +47,24 @@ body.landing-page {
     margin: 0;
     padding: 0;
     line-height: 1.7; /* Increased line-height for readability */
-    font-size: 16px;
+    font-size: clamp(0.875rem, 1vw + 0.75rem, 1rem);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
     overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Container sizing */
+.container {
+    width: min(100% - 2rem, var(--container-max));
+    margin-inline: auto;
+    padding-inline: clamp(1rem, 5vw, 2rem);
+}
+
+.container-narrow {
+    width: min(100% - 2rem, var(--container-narrow));
+    margin-inline: auto;
+    padding: 0 1rem;
 }
 
 /* ----------------------------------- */
@@ -59,9 +77,9 @@ h1, h2, h3 {
 }
 
 h1 {
-    font-size: clamp(2.5rem, 6vw, 4rem); /* Responsive font size */
+    font-size: clamp(2rem, 5vw + 1rem, 4rem); /* Responsive font size */
     margin-bottom: 1rem;
-    line-height: 1.2;
+    line-height: 1.1;
     background: var(--heading-gradient);
     -webkit-background-clip: text;
     background-clip: text;
@@ -69,15 +87,17 @@ h1 {
 }
 
 h2 {
-    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-size: clamp(1.5rem, 3vw + 1rem, 2.8rem);
     margin-bottom: 3rem; /* More space below section titles */
     text-align: center;
+    line-height: 1.2;
     color: var(--text-color);
 }
 
 h3 {
-    font-size: 1.4rem; /* Slightly larger card titles */
+    font-size: clamp(1.1rem, 2vw + 0.5rem, 1.4rem); /* Slightly larger card titles */
     margin-bottom: 0.75rem;
+    line-height: 1.3;
     color: var(--primary-accent); /* Use accent for card titles */
 }
 
@@ -98,8 +118,16 @@ a:hover {
 }
 
 section {
-    padding: 5rem 2rem; /* Consistent vertical padding */
-    text-align: center;
+    padding: clamp(2.5rem, 6vw, 4rem) 0; /* Remove horizontal padding */
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+section > * {
+    width: min(100% - 2rem, var(--container-max));
+    margin-inline: auto;
 }
 
 /* ----------------------------------- */
@@ -108,22 +136,26 @@ section {
 .nav-header {
     position: fixed;
     top: 0;
-    left: 0; /* Added left: 0 */
+    left: 0;
     width: 100%;
     background: rgba(17, 24, 39, 0.8); /* Slightly darker, matching bg */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     z-index: 1000;
     border-bottom: 1px solid var(--border-color);
+    min-height: 4rem; /* Set minimum height instead of fixed height */
+    display: flex; /* Add flex display */
+    align-items: center; /* Center items vertically */
 }
 
 .nav-content {
-    max-width: 1200px;
+    max-width: var(--container-max);
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.8rem 2rem; /* Slightly adjusted padding */
+    width: min(100% - 2rem, var(--container-max));
+    padding: 0.75rem 1rem; /* Adjust padding for better vertical spacing */
 }
 
 .logo {
@@ -143,13 +175,19 @@ section {
 .nav-links {
     display: flex;
     gap: 2rem;
+    align-items: center; /* Center links vertically */
+    height: 100%;
 }
 
 .nav-links a {
+    display: flex;
+    align-items: center;
+    height: 100%;
     color: var(--text-color);
     text-decoration: none;
     font-size: 0.95rem;
     transition: color 0.3s;
+    padding: 0.25rem 0; /* Add small vertical padding */
 }
 
 .nav-links a:hover {
@@ -193,34 +231,41 @@ section {
 
 .hero-animation {
     position: relative;
-    width: 100%;
-    max-width: 800px;
+    width: min(100% - 2rem, 800px);
     margin: 3rem auto;
-    text-align: center;
-    background: rgba(31, 41, 55, 0.8);  /* Darker background */
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 12px;
-    padding: 2rem;
+    padding: clamp(1.5rem, 4vw, 2rem);
     display: flex;
     flex-direction: column;
     align-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 #reactionCanvas {
-    background: rgba(17, 24, 39, 0.95);  /* Dark canvas background */
-    border-radius: 12px;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 2.5/1;
+    background: #ffffff;
+    border-radius: 8px;
     margin-bottom: 1rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
 .atom-key {
+    display: none; /* Hide all atom keys by default */
+}
+
+.hero-animation .atom-key {
+    display: block; /* Show only in hero section */
     position: absolute;
-    top: 3rem;
-    right: 3rem;  /* Changed from left to right */
-    background: rgba(31, 41, 55, 0.9);  /* Dark semi-transparent background */
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 255, 255, 0.95);  /* Changed to white background */
     padding: 1rem;
     border-radius: 8px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    border: 1px solid #e5e7eb;  /* Lighter border */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);  /* Lighter shadow */
     text-align: left;
     z-index: 2;
     min-width: 150px;
@@ -229,7 +274,7 @@ section {
 .atom-key-title {
     font-weight: bold;
     margin-bottom: 0.8rem;
-    color: var(--text-color);  /* Match theme text color */
+    color: #333;  /* Darker text for contrast */
     font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -240,25 +285,8 @@ section {
     align-items: center;
     gap: 0.8rem;
     margin: 0.5rem 0;
-    color: var(--text-color);  /* Match theme text color */
+    color: #333;  /* Darker text for contrast */
     font-size: 0.9rem;
-}
-
-.replay-btn {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    background: #2196f3;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 0 auto;
-}
-
-.replay-btn:hover {
-    background: #1976d2;
 }
 
 /* ----------------------------------- */
@@ -499,6 +527,10 @@ section {
     padding: 6rem 4rem;
     max-width: 1400px;
     margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(1.5rem, 5vw, 4rem);
+    padding: clamp(2rem, 5vw, 4rem) 1rem;
 }
 
 .split-section:nth-child(even) {
@@ -508,11 +540,13 @@ section {
 .split-content {
     flex: 1;
     text-align: left;
+    flex: 1 1 min(100%, 25rem);
 }
 
 .split-image {
     flex: 1;
     position: relative;
+    flex: 1 1 min(100%, 25rem);
 }
 
 .split-image img {
@@ -522,16 +556,42 @@ section {
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
-.split-section h2 {
-    text-align: left;
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
+/* Properties section specific layout */
+#properties.split-section {
+    flex-direction: row;
+    gap: 3rem;
+    align-items: flex-start;
+    padding: clamp(2rem, 5vw, 4rem) 1rem;
 }
 
-.split-section p {
-    color: #a0aec0;
-    font-size: 1.1rem;
-    margin-bottom: 1.5rem;
+#properties .split-content {
+    flex: 1;
+    max-width: 500px;
+}
+
+#properties .split-image {
+    flex: 1;
+    min-width: 320px;
+}
+
+#properties .interactive-diagram {
+    margin: 0;
+    height: 100%;
+}
+
+#properties .property-table {
+    margin: 0;
+    padding: 1rem;
+}
+
+/* Reactants/Products section specific styles */
+#reactants-products.split-section {
+    padding: clamp(2rem, 5vw, 4rem);
+    gap: clamp(2rem, 5vw, 4rem);
+}
+
+#reactants-products .interactive-diagram {
+    padding: clamp(1rem, 3vw, 1.5rem);
 }
 
 /* ----------------------------------- */
@@ -539,7 +599,7 @@ section {
 /* ----------------------------------- */
 .site-footer {
     width: 100%;
-    padding: 2.5rem 2rem; /* More padding */
+    padding: clamp(2rem, 5vw, 4rem) 0;
     text-align: center;
     background: rgba(17, 24, 39, 0.5); /* Match header background */
     margin-top: auto; /* Push to bottom */
@@ -547,12 +607,13 @@ section {
 }
 
 .footer-content {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem; /* Space between text and links */
+    width: min(100% - 2rem, var(--container-max));
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: clamp(2rem, 5vw, 3rem);
+    justify-items: center;
+    text-align: center;
 }
 
 .site-footer p {
@@ -641,6 +702,47 @@ section {
     .split-content, .split-image {
         width: 100%;
     }
+
+    .interactive-diagram canvas {
+        aspect-ratio: 3/1.5; /* Slightly taller on mobile */
+    }
+    
+    #reactionCanvas {
+        aspect-ratio: 2/1; /* Slightly taller on mobile */
+    }
+    
+    .reaction-diagram {
+        padding: 1rem;
+    }
+
+    #properties.split-section {
+        flex-direction: column-reverse;
+        gap: 2rem;
+    }
+
+    #properties .split-content,
+    #properties .split-image {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    #reactants-products.split-section {
+        padding: 2rem 1rem;
+    }
+
+    .hero-animation {
+        width: min(100% - 1rem, 100%);
+        padding: 1rem;
+        margin: 2rem auto;
+    }
+
+    .hero-animation .atom-key {
+        position: static;
+        width: 100%;
+        max-width: none;
+        margin-top: 1rem;
+        padding: 0.75rem;
+    }
 }
 
 /* New CSS styles for informational website elements */
@@ -673,10 +775,15 @@ section {
 }
 
 .info-cards {
+    width: min(100% - 2rem, var(--container-max));
+    margin-inline: auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+    gap: clamp(1rem, 3vw, 2rem);
 }
 
 .info-card {
@@ -685,16 +792,19 @@ section {
     border-radius: 12px;
     border: 1px solid var(--border-color);
     text-align: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.card-icon {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+.info-card p {
+    margin-inline: auto;
 }
 
 .reaction-diagram {
     background: var(--card-bg);
-    padding: 3rem;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
     border-radius: 12px;
     margin: 3rem 0;
     text-align: center;
@@ -788,10 +898,13 @@ section {
 }
 
 .footer-content {
+    width: min(100% - 2rem, var(--container-max));
+    margin-inline: auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 3rem;
-    padding: 3rem 2rem;
+    gap: clamp(2rem, 5vw, 3rem);
+    justify-items: center;
+    text-align: center;
 }
 
 .footer-section h4 {
@@ -818,8 +931,9 @@ section {
     }
     
     .equation-display {
-        font-size: 1.2rem;
-        gap: 1rem;
+        font-size: 1.1rem;
+        gap: 0.75rem;
+        padding: 0.5rem;
     }
     
     .footer-content {
@@ -844,4 +958,264 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.interactive-diagram {
+    background: #ffffff;
+    border-radius: 12px;
+    padding: clamp(1.5rem, 4vw, 2rem);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    width: min(100%, 800px);
+    margin-inline: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.interactive-diagram h4 {
+    margin: 0 0 1.5rem 0;
+    color: #333;
+    text-align: center;
+    font-size: clamp(0.9rem, 2vw, 1.1rem);
+    padding: 0 1rem;
+}
+
+.interactive-diagram canvas {
+    display: block; /* Ensure canvas behaves like a block element */
+    max-width: 100%; /* Make canvas responsive within its container */
+    height: auto;   /* Maintain aspect ratio */
+    margin: 0 auto; /* Center canvas if container is wider */
+    background: #ffffff;
+    aspect-ratio: 4/1.5; /* More horizontal aspect ratio */
+}
+
+/* Specific aspect ratios for different diagrams */
+#conservationCanvas {
+    aspect-ratio: 8/3; /* Less stretched for conservation diagram */
+    margin-bottom: 1rem;
+}
+
+#mechanismCanvas {
+    aspect-ratio: 5/2; /* Better proportion for mechanism steps */
+    margin-bottom: 1rem;
+}
+
+.reaction-diagram {
+    padding: clamp(2rem, 4vw, 3rem);
+    max-width: min(100%, 900px);
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.equation-display {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(1rem, 3vw, 2rem);
+    font-size: clamp(1.2rem, 2.5vw, 1.5rem);
+    flex-wrap: wrap;
+    padding: 1rem;
+}
+
+.molecule {
+    font-family: 'Times New Roman', serif;
+    display: inline-block;
+    margin: 0 0.25rem;
+}
+
+.animation-controls {
+    display: flex;
+    justify-content: center;
+    gap: clamp(0.5rem, 2vw, 1rem);
+    margin-top: 1rem;
+    padding: 0.5rem;
+}
+
+.control-btn {
+    min-width: 120px;
+    padding: 0.75rem 1rem;
+    font-size: clamp(0.875rem, 1.5vw, 1rem);
+}
+
+.reaction-diagram {
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    max-width: min(100%, 900px);
+    margin: 2rem auto;
+}
+
+.animation-controls {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 0.75rem;
+}
+
+.animation-controls button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    background: var(--primary-accent);
+    color: white;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.animation-controls button:hover {
+    background: var(--secondary-accent);
+}
+
+.control-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-accent);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.control-btn:hover {
+    background: var(--secondary-accent);
+}
+
+.property-table {
+    background: white;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin: 1rem -1rem;
+    padding: 0 1rem;
+}
+
+.property-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.property-table th,
+.property-table td {
+    padding: 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+    color: #333;
+}
+
+.property-table th {
+    background: #f3f4f6;
+    font-weight: 600;
+}
+
+.property-table tr:last-child td {
+    border-bottom: none;
+}
+
+.info-diagram {
+    width: 100%;
+    max-width: 400px; /* Adjust as needed */
+    height: auto;
+    display: block;
+    margin: 1rem auto; /* Center diagram */
+    background-color: #fff; /* White background for SVGs */
+    border-radius: 8px; /* Match other elements */
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Ensure SVGs in split-image take up space */
+.split-image svg.info-diagram {
+    max-width: 100%; /* Allow SVG to fill container */
+}
+
+/* Media Queries */
+@media (min-width: 40em) {  /* 640px */
+    .nav-links {
+        display: flex;
+        gap: clamp(1rem, 3vw, 2rem);
+    }
+}
+
+@media (min-width: 48em) {  /* 768px */
+    body.landing-page {
+        font-size: clamp(0.9rem, 1.5vw + 0.5rem, 1rem);
+    }
+
+    .split-section {
+        flex-wrap: nowrap;
+    }
+
+    .split-section:nth-child(even) {
+        flex-direction: row-reverse;
+    }
+}
+
+@media (min-width: 64em) {  /* 1024px */
+    .container,
+    .container-narrow {
+        padding: 0 2rem;
+    }
+}
+
+/* Small screens and touch devices */
+@media (max-width: 40em), (hover: none) {
+    .nav-links {
+        display: none;
+    }
+
+    .hero-section {
+        padding-top: max(20vh, 8rem);
+    }
+
+    .animation-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+
+    .control-btn {
+        width: 100%;
+        justify-content: center;
+        padding: 0.75rem;
+    }
+
+    .atom-key {
+        position: static;
+        margin-top: 1rem;
+        width: 100%;
+    }
+}
+
+/* Print styles */
+@media print {
+    .nav-header,
+    .animation-controls,
+    .footer {
+        display: none;
+    }
+
+    body {
+        color: black;
+        background: white;
+    }
+
+    .interactive-diagram {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+/* Media query for large screens */
+@media (min-width: 1200px) {
+    .info-cards {
+        grid-template-columns: repeat(3, 1fr); /* Force 3 columns on large screens */
+    }
+    
+    .split-section {
+        padding-inline: 0;
+    }
 }
